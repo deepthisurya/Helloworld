@@ -1,0 +1,54 @@
+package com.company;
+
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+class Source {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Source obj = new Source();
+        //Creating the set that preserves the order of the elements
+        Set<Integer> s1 = new LinkedHashSet<Integer>();
+        Set<Integer> s2 = new LinkedHashSet<Integer>();
+        //adding elements into the set as per the size
+        System.out.print("Set on1 : ");
+        obj.addElement(s1, sc);
+        System.out.print("Set on2: ");
+        obj.addElement(s2, sc);
+        //Checking if the elements of the s1 are present in the s2 in the same order
+        boolean status = obj.CheckElements(s1, s2);
+        if (status) System.out.println("S2 contains s1");
+        //Printing the elements of the set
+        System.out.println(s1);
+        System.out.println(s2);
+    }
+
+    // this is the method to take the size of the set and add the elements into it and return the set to the main
+    public Set addElement(Set s, Scanner sc) {
+        int size = sc.nextInt();
+        while (size-- > 0) {
+            s.add(sc.nextInt());
+        }
+        return s;
+    }
+
+    public boolean CheckElements(Set s1, Set s2) {
+        int count = 0;
+        if (s1.size() > s2.size()) { // checking if the first set is larger
+            System.out.println("S1 is bigger than s2");
+            System.exit(0);
+        }
+        //delcare a iterator for the larger set
+        Iterator<Integer> its1 = s1.iterator();
+        while(its1.hasNext()){
+            if(s2.contains(its1.next()))count++;
+        }
+
+        if (count == s1.size()) {
+            return true;
+        }
+        return false;
+    }
+}
